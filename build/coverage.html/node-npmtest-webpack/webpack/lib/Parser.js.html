@@ -1,0 +1,3869 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-webpack/webpack/lib/Parser.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-webpack">npmtest-webpack (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-webpack/webpack/lib/Parser.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">9.73% <small>(80 / 822)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 589)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0.97% <small>(1 / 103)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">10.34% <small>(80 / 774)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-webpack/webpack/lib/</a> &#187; Parser.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124
+1125
+1126
+1127
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135
+1136
+1137
+1138
+1139
+1140
+1141
+1142
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151
+1152
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164
+1165
+1166
+1167
+1168
+1169
+1170
+1171
+1172
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190
+1191
+1192
+1193
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215
+1216</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var acorn = require("acorn-dynamic-import").default;
+var Tapable = require("tapable");
+var BasicEvaluatedExpression = require("./BasicEvaluatedExpression");
+&nbsp;
+<span class="fstat-no" title="function not covered" >function Parser(options) {</span>
+<span class="cstat-no" title="statement not covered" >	Tapable.call(this);</span>
+<span class="cstat-no" title="statement not covered" >	this.options = options;</span>
+<span class="cstat-no" title="statement not covered" >	this.initializeEvaluating();</span>
+}
+module.exports = Parser;
+&nbsp;
+// Syntax: https://developer.mozilla.org/en/SpiderMonkey/Parser_API
+&nbsp;
+Parser.prototype = Object.create(Tapable.prototype);
+Parser.prototype.constructor = Parser;
+&nbsp;
+Parser.prototype.initializeEvaluating = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="fstat-no" title="function not covered" >	function joinRanges(startRange, endRange) {</span>
+<span class="cstat-no" title="statement not covered" >		if(!endRange) <span class="cstat-no" title="statement not covered" >return startRange;</span></span>
+<span class="cstat-no" title="statement not covered" >		if(!startRange) <span class="cstat-no" title="statement not covered" >return endRange;</span></span>
+<span class="cstat-no" title="statement not covered" >		return [startRange[0], endRange[1]];</span>
+	}
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate Literal", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		switch(typeof expr.value) {</span>
+			case "number":
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setNumber(expr.value).setRange(expr.range);</span>
+			case "string":
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setString(expr.value).setRange(expr.range);</span>
+			case "boolean":
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setBoolean(expr.value).setRange(expr.range);</span>
+		}
+<span class="cstat-no" title="statement not covered" >		if(expr.value === null)</span>
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setNull().setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >		if(expr.value instanceof RegExp)</span>
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setRegExp(expr.value).setRange(expr.range);</span>
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate LogicalExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var left;</span>
+<span class="cstat-no" title="statement not covered" >		var leftAsBool;</span>
+<span class="cstat-no" title="statement not covered" >		var right;</span>
+<span class="cstat-no" title="statement not covered" >		if(expr.operator === "&amp;&amp;") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			leftAsBool = left &amp;&amp; left.asBool();</span>
+<span class="cstat-no" title="statement not covered" >			if(leftAsBool === false) <span class="cstat-no" title="statement not covered" >return left.setRange(expr.range);</span></span>
+<span class="cstat-no" title="statement not covered" >			if(leftAsBool !== true) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			return right.setRange(expr.range);</span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "||") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			leftAsBool = left &amp;&amp; left.asBool();</span>
+<span class="cstat-no" title="statement not covered" >			if(leftAsBool === true) <span class="cstat-no" title="statement not covered" >return left.setRange(expr.range);</span></span>
+<span class="cstat-no" title="statement not covered" >			if(leftAsBool !== false) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			return right.setRange(expr.range);</span>
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate BinaryExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var left;</span>
+<span class="cstat-no" title="statement not covered" >		var right;</span>
+<span class="cstat-no" title="statement not covered" >		var res;</span>
+<span class="cstat-no" title="statement not covered" >		if(expr.operator === "+") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			if(left.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >				if(right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setString(left.string + right.string);</span>
+				} else <span class="cstat-no" title="statement not covered" >if(right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setString(left.string + right.number);</span>
+				} else <span class="cstat-no" title="statement not covered" >if(right.isWrapped() &amp;&amp; right.prefix &amp;&amp; right.prefix.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(</span>
+						new BasicEvaluatedExpression()
+						.setString(left.string + right.prefix.string)
+						.setRange(joinRanges(left.range, right.prefix.range)),
+						right.postfix);
+				} else {
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left, null);</span>
+				}
+			} else <span class="cstat-no" title="statement not covered" >if(left.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >				if(right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setString(left.number + right.string);</span>
+				} else <span class="cstat-no" title="statement not covered" >if(right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setNumber(left.number + right.number);</span>
+				}
+			} else <span class="cstat-no" title="statement not covered" >if(left.isWrapped()) {</span>
+<span class="cstat-no" title="statement not covered" >				if(left.postfix &amp;&amp; left.postfix.isString() &amp;&amp; right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left.prefix,</span>
+						new BasicEvaluatedExpression()
+						.setString(left.postfix.string + right.string)
+						.setRange(joinRanges(left.postfix.range, right.range))
+					);
+				} else <span class="cstat-no" title="statement not covered" >if(left.postfix &amp;&amp; left.postfix.isString() &amp;&amp; right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left.prefix,</span>
+						new BasicEvaluatedExpression()
+						.setString(left.postfix.string + right.number)
+						.setRange(joinRanges(left.postfix.range, right.range))
+					);
+				} else <span class="cstat-no" title="statement not covered" >if(right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left.prefix, right);</span>
+				} else <span class="cstat-no" title="statement not covered" >if(right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left.prefix,</span>
+						new BasicEvaluatedExpression()
+						.setString(right.number + "")
+						.setRange(right.range));
+				} else {
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(left.prefix, new BasicEvaluatedExpression());</span>
+				}
+			} else {
+<span class="cstat-no" title="statement not covered" >				if(right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >					res.setWrapped(null, right);</span>
+				}
+			}
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			return res;</span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "-") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			if(!left.isNumber() || !right.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			res.setNumber(left.number - right.number);</span>
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			return res;</span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "*") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			if(!left.isNumber() || !right.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			res.setNumber(left.number * right.number);</span>
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			return res;</span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "/") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			if(!left.isNumber() || !right.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			res.setNumber(left.number / right.number);</span>
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			return res;</span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "==" || expr.operator === "===") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			if(left.isString() &amp;&amp; right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.string === right.string);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(left.isNumber() &amp;&amp; right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.number === right.number);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(left.isBoolean() &amp;&amp; right.isBoolean()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.bool === right.bool);</span>
+			}
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "!=" || expr.operator === "!==") {</span>
+<span class="cstat-no" title="statement not covered" >			left = this.evaluateExpression(expr.left);</span>
+<span class="cstat-no" title="statement not covered" >			right = this.evaluateExpression(expr.right);</span>
+<span class="cstat-no" title="statement not covered" >			if(!left || !right) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >			if(left.isString() &amp;&amp; right.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.string !== right.string);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(left.isNumber() &amp;&amp; right.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.number !== right.number);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(left.isBoolean() &amp;&amp; right.isBoolean()) {</span>
+<span class="cstat-no" title="statement not covered" >				return res.setBoolean(left.bool !== right.bool);</span>
+			}
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate UnaryExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expr.operator === "typeof") {</span>
+<span class="cstat-no" title="statement not covered" >			var res;</span>
+<span class="cstat-no" title="statement not covered" >			if(expr.argument.type === "Identifier") {</span>
+<span class="cstat-no" title="statement not covered" >				var name = this.scope.renames["$" + expr.argument.name] || expr.argument.name;</span>
+<span class="cstat-no" title="statement not covered" >				if(this.scope.definitions.indexOf(name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >					res = this.applyPluginsBailResult1("evaluate typeof " + name, expr);</span>
+<span class="cstat-no" title="statement not covered" >					if(res !== undefined) <span class="cstat-no" title="statement not covered" >return res;</span></span>
+				}
+			}
+<span class="cstat-no" title="statement not covered" >			if(expr.argument.type === "MemberExpression") {</span>
+<span class="cstat-no" title="statement not covered" >				var expression = expr.argument;</span>
+<span class="cstat-no" title="statement not covered" >				var exprName = [];</span>
+<span class="cstat-no" title="statement not covered" >				while(expression.type === "MemberExpression" &amp;&amp; !expression.computed) {</span>
+<span class="cstat-no" title="statement not covered" >					exprName.unshift(this.scope.renames["$" + expression.property.name] || expression.property.name);</span>
+<span class="cstat-no" title="statement not covered" >					expression = expression.object;</span>
+				}
+<span class="cstat-no" title="statement not covered" >				if(expression.type === "Identifier") {</span>
+<span class="cstat-no" title="statement not covered" >					exprName.unshift(this.scope.renames["$" + expression.name] || expression.name);</span>
+<span class="cstat-no" title="statement not covered" >					if(this.scope.definitions.indexOf(name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >						exprName = exprName.join(".");</span>
+<span class="cstat-no" title="statement not covered" >						res = this.applyPluginsBailResult1("evaluate typeof " + exprName, expr);</span>
+<span class="cstat-no" title="statement not covered" >						if(res !== undefined) <span class="cstat-no" title="statement not covered" >return res;</span></span>
+					}
+				}
+			}
+<span class="cstat-no" title="statement not covered" >			if(expr.argument.type === "FunctionExpression") {</span>
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setString("function").setRange(expr.range);</span>
+			}
+<span class="cstat-no" title="statement not covered" >			var arg = this.evaluateExpression(expr.argument);</span>
+<span class="cstat-no" title="statement not covered" >			if(arg.isString() || arg.isWrapped()) <span class="cstat-no" title="statement not covered" >return new BasicEvaluatedExpression().setString("string").setRange(expr.range);</span></span>
+			else <span class="cstat-no" title="statement not covered" >if(arg.isNumber()) <span class="cstat-no" title="statement not covered" >return new BasicEvaluatedExpression().setString("number").setRange(expr.range);</span></span>
+			else <span class="cstat-no" title="statement not covered" >if(arg.isBoolean()) <span class="cstat-no" title="statement not covered" >return new BasicEvaluatedExpression().setString("boolean").setRange(expr.range);</span></span>
+			else <span class="cstat-no" title="statement not covered" >if(arg.isArray() || arg.isConstArray() || arg.isRegExp()) <span class="cstat-no" title="statement not covered" >return new BasicEvaluatedExpression().setString("object").setRange(expr.range);</span></span>
+		} else <span class="cstat-no" title="statement not covered" >if(expr.operator === "!") {</span>
+<span class="cstat-no" title="statement not covered" >			var argument = this.evaluateExpression(expr.argument);</span>
+<span class="cstat-no" title="statement not covered" >			if(!argument) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			if(argument.isBoolean()) {</span>
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setBoolean(!argument.bool).setRange(expr.range);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(argument.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setBoolean(!argument.string).setRange(expr.range);</span>
+			} else <span class="cstat-no" title="statement not covered" >if(argument.isNumber()) {</span>
+<span class="cstat-no" title="statement not covered" >				return new BasicEvaluatedExpression().setBoolean(!argument.number).setRange(expr.range);</span>
+			}
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate typeof undefined", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		return new BasicEvaluatedExpression().setString("undefined").setRange(expr.range);</span>
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate Identifier", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var name = this.scope.renames["$" + expr.name] || expr.name;</span>
+<span class="cstat-no" title="statement not covered" >		if(this.scope.definitions.indexOf(expr.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >			var result = this.applyPluginsBailResult1("evaluate Identifier " + name, expr);</span>
+<span class="cstat-no" title="statement not covered" >			if(result) <span class="cstat-no" title="statement not covered" >return result;</span></span>
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setIdentifier(name).setRange(expr.range);</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			return this.applyPluginsBailResult1("evaluate defined Identifier " + name, expr);</span>
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate MemberExpression", <span class="fstat-no" title="function not covered" >function(expression) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var expr = expression;</span>
+<span class="cstat-no" title="statement not covered" >		var exprName = [];</span>
+<span class="cstat-no" title="statement not covered" >		while(expr.type === "MemberExpression" &amp;&amp;</span>
+			expr.property.type === (expr.computed ? "Literal" : "Identifier")
+		) {
+<span class="cstat-no" title="statement not covered" >			exprName.unshift(expr.property.name || expr.property.value);</span>
+<span class="cstat-no" title="statement not covered" >			expr = expr.object;</span>
+		}
+<span class="cstat-no" title="statement not covered" >		if(expr.type === "Identifier") {</span>
+<span class="cstat-no" title="statement not covered" >			var name = this.scope.renames["$" + expr.name] || expr.name;</span>
+<span class="cstat-no" title="statement not covered" >			if(this.scope.definitions.indexOf(name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >				exprName.unshift(name);</span>
+<span class="cstat-no" title="statement not covered" >				exprName = exprName.join(".");</span>
+<span class="cstat-no" title="statement not covered" >				if(this.scope.definitions.indexOf(expr.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >					var result = this.applyPluginsBailResult1("evaluate Identifier " + exprName, expression);</span>
+<span class="cstat-no" title="statement not covered" >					if(result) <span class="cstat-no" title="statement not covered" >return result;</span></span>
+<span class="cstat-no" title="statement not covered" >					return new BasicEvaluatedExpression().setIdentifier(exprName).setRange(expression.range);</span>
+				} else {
+<span class="cstat-no" title="statement not covered" >					return this.applyPluginsBailResult1("evaluate defined Identifier " + exprName, expression);</span>
+				}
+			}
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate CallExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expr.callee.type !== "MemberExpression") <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expr.callee.property.type !== (expr.callee.computed ? "Literal" : "Identifier")) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		var param = this.evaluateExpression(expr.callee.object);</span>
+<span class="cstat-no" title="statement not covered" >		if(!param) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		var property = expr.callee.property.name || expr.callee.property.value;</span>
+<span class="cstat-no" title="statement not covered" >		return this.applyPluginsBailResult("evaluate CallExpression ." + property, expr, param);</span>
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate CallExpression .replace", <span class="fstat-no" title="function not covered" >function(expr, param) {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(!param.isString()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expr.arguments.length !== 2) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		var arg1 = this.evaluateExpression(expr.arguments[0]);</span>
+<span class="cstat-no" title="statement not covered" >		var arg2 = this.evaluateExpression(expr.arguments[1]);</span>
+<span class="cstat-no" title="statement not covered" >		if(!arg1.isString() &amp;&amp; !arg1.isRegExp()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		arg1 = arg1.regExp || arg1.string;</span>
+<span class="cstat-no" title="statement not covered" >		if(!arg2.isString()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		arg2 = arg2.string;</span>
+<span class="cstat-no" title="statement not covered" >		return new BasicEvaluatedExpression().setString(param.string.replace(arg1, arg2)).setRange(expr.range);</span>
+	});
+<span class="cstat-no" title="statement not covered" >	["substr", "substring"].forEach(<span class="fstat-no" title="function not covered" >function(fn) {</span></span>
+<span class="cstat-no" title="statement not covered" >		this.plugin("evaluate CallExpression ." + fn, <span class="fstat-no" title="function not covered" >function(expr, param) {</span></span>
+<span class="cstat-no" title="statement not covered" >			if(!param.isString()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			var arg1;</span>
+<span class="cstat-no" title="statement not covered" >			var result, str = param.string;</span>
+<span class="cstat-no" title="statement not covered" >			switch(expr.arguments.length) {</span>
+				case 1:
+<span class="cstat-no" title="statement not covered" >					arg1 = this.evaluateExpression(expr.arguments[0]);</span>
+<span class="cstat-no" title="statement not covered" >					if(!arg1.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >					result = str[fn](arg1.number);</span>
+<span class="cstat-no" title="statement not covered" >					break;</span>
+				case 2:
+<span class="cstat-no" title="statement not covered" >					arg1 = this.evaluateExpression(expr.arguments[0]);</span>
+<span class="cstat-no" title="statement not covered" >					var arg2 = this.evaluateExpression(expr.arguments[1]);</span>
+<span class="cstat-no" title="statement not covered" >					if(!arg1.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >					if(!arg2.isNumber()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >					result = str[fn](arg1.number, arg2.number);</span>
+<span class="cstat-no" title="statement not covered" >					break;</span>
+				default:
+<span class="cstat-no" title="statement not covered" >					return;</span>
+			}
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setString(result).setRange(expr.range);</span>
+		});
+&nbsp;
+		/**
+		 * @param {string} kind "cooked" | "raw"
+		 * @param {any[]} quasis quasis
+		 * @param {any[]} expressions expressions
+		 * @return {BasicEvaluatedExpression[]} Simplified template
+		 */
+<span class="fstat-no" title="function not covered" >		function getSimplifiedTemplateResult(kind, quasis, expressions) {</span>
+<span class="cstat-no" title="statement not covered" >			var i = 0;</span>
+<span class="cstat-no" title="statement not covered" >			var parts = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			for(i = 0; i &lt; quasis.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >				parts.push(new BasicEvaluatedExpression().setString(quasis[i].value[kind]).setRange(quasis[i].range));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				if(i &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >					var prevExpr = parts[parts.length - 2],</span>
+						lastExpr = parts[parts.length - 1];
+<span class="cstat-no" title="statement not covered" >					var expr = this.evaluateExpression(expressions[i - 1]);</span>
+<span class="cstat-no" title="statement not covered" >					if(!(expr.isString() || expr.isNumber())) <span class="cstat-no" title="statement not covered" >continue;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >					prevExpr.setString(prevExpr.string + (expr.isString() ? expr.string : expr.number) + lastExpr.string);</span>
+<span class="cstat-no" title="statement not covered" >					prevExpr.setRange([prevExpr.range[0], lastExpr.range[1]]);</span>
+<span class="cstat-no" title="statement not covered" >					parts.pop();</span>
+				}
+			}
+<span class="cstat-no" title="statement not covered" >			return parts;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this.plugin("evaluate TemplateLiteral", <span class="fstat-no" title="function not covered" >function(node) {</span></span>
+<span class="cstat-no" title="statement not covered" >			var parts = getSimplifiedTemplateResult.call(this, "cooked", node.quasis, node.expressions);</span>
+<span class="cstat-no" title="statement not covered" >			if(parts.length === 1) {</span>
+<span class="cstat-no" title="statement not covered" >				return parts[0].setRange(node.range);</span>
+			}
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setTemplateString(parts).setRange(node.range);</span>
+		});
+<span class="cstat-no" title="statement not covered" >		this.plugin("evaluate TaggedTemplateExpression", <span class="fstat-no" title="function not covered" >function(node) {</span></span>
+<span class="cstat-no" title="statement not covered" >			if(this.evaluateExpression(node.tag).identifier !== "String.raw") <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			var parts = getSimplifiedTemplateResult.call(this, "raw", node.quasi.quasis, node.quasi.expressions);</span>
+<span class="cstat-no" title="statement not covered" >			return new BasicEvaluatedExpression().setTemplateString(parts).setRange(node.range);</span>
+		});
+	}, this);
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate CallExpression .split", <span class="fstat-no" title="function not covered" >function(expr, param) {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(!param.isString()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expr.arguments.length !== 1) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		var result;</span>
+<span class="cstat-no" title="statement not covered" >		var arg = this.evaluateExpression(expr.arguments[0]);</span>
+<span class="cstat-no" title="statement not covered" >		if(arg.isString()) {</span>
+<span class="cstat-no" title="statement not covered" >			result = param.string.split(arg.string);</span>
+		} else <span class="cstat-no" title="statement not covered" >if(arg.isRegExp()) {</span>
+<span class="cstat-no" title="statement not covered" >			result = param.string.split(arg.regExp);</span>
+		} else <span class="cstat-no" title="statement not covered" >return;</span>
+<span class="cstat-no" title="statement not covered" >		return new BasicEvaluatedExpression().setArray(result).setRange(expr.range);</span>
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate ConditionalExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var condition = this.evaluateExpression(expr.test);</span>
+<span class="cstat-no" title="statement not covered" >		var conditionValue = condition.asBool();</span>
+<span class="cstat-no" title="statement not covered" >		var res;</span>
+<span class="cstat-no" title="statement not covered" >		if(conditionValue === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >			var consequent = this.evaluateExpression(expr.consequent);</span>
+<span class="cstat-no" title="statement not covered" >			var alternate = this.evaluateExpression(expr.alternate);</span>
+<span class="cstat-no" title="statement not covered" >			if(!consequent || !alternate) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >			res = new BasicEvaluatedExpression();</span>
+<span class="cstat-no" title="statement not covered" >			if(consequent.isConditional())</span>
+<span class="cstat-no" title="statement not covered" >				res.setOptions(consequent.options);</span>
+			else
+<span class="cstat-no" title="statement not covered" >				res.setOptions([consequent]);</span>
+<span class="cstat-no" title="statement not covered" >			if(alternate.isConditional())</span>
+<span class="cstat-no" title="statement not covered" >				res.addOptions(alternate.options);</span>
+			else
+<span class="cstat-no" title="statement not covered" >				res.addOptions([alternate]);</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			res = this.evaluateExpression(conditionValue ? expr.consequent : expr.alternate);</span>
+		}
+<span class="cstat-no" title="statement not covered" >		res.setRange(expr.range);</span>
+<span class="cstat-no" title="statement not covered" >		return res;</span>
+	});
+<span class="cstat-no" title="statement not covered" >	this.plugin("evaluate ArrayExpression", <span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var items = expr.elements.map(<span class="fstat-no" title="function not covered" >function(element) {</span></span>
+<span class="cstat-no" title="statement not covered" >			return element !== null &amp;&amp; this.evaluateExpression(element);</span>
+		}, this);
+<span class="cstat-no" title="statement not covered" >		if(!items.every(Boolean)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >		return new BasicEvaluatedExpression().setItems(items).setRange(expr.range);</span>
+	});
+};
+&nbsp;
+Parser.prototype.getRenameIdentifier = <span class="fstat-no" title="function not covered" >function getRenameIdentifier(expr) {</span>
+<span class="cstat-no" title="statement not covered" >	var result = this.evaluateExpression(expr);</span>
+<span class="cstat-no" title="statement not covered" >	if(!result) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >	if(result.isIdentifier()) <span class="cstat-no" title="statement not covered" >return result.identifier;</span></span>
+<span class="cstat-no" title="statement not covered" >	return;</span>
+};
+&nbsp;
+Parser.prototype.walkClass = <span class="fstat-no" title="function not covered" >function walkClass(classy) {</span>
+<span class="cstat-no" title="statement not covered" >	if(classy.superClass)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(classy.superClass);</span>
+<span class="cstat-no" title="statement not covered" >	if(classy.body &amp;&amp; classy.body.type === "ClassBody") {</span>
+<span class="cstat-no" title="statement not covered" >		classy.body.body.forEach(<span class="fstat-no" title="function not covered" >function(methodDefinition) {</span></span>
+<span class="cstat-no" title="statement not covered" >			if(methodDefinition.type === "MethodDefinition")</span>
+<span class="cstat-no" title="statement not covered" >				this.walkMethodDefinition(methodDefinition);</span>
+		}, this);
+	}
+};
+&nbsp;
+Parser.prototype.walkMethodDefinition = <span class="fstat-no" title="function not covered" >function walkMethodDefinition(methodDefinition) {</span>
+<span class="cstat-no" title="statement not covered" >	if(methodDefinition.computed &amp;&amp; methodDefinition.key)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(methodDefinition.key);</span>
+<span class="cstat-no" title="statement not covered" >	if(methodDefinition.value)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(methodDefinition.value);</span>
+};
+&nbsp;
+Parser.prototype.walkStatements = <span class="fstat-no" title="function not covered" >function walkStatements(statements) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var indexA = 0, lenA = statements.length; indexA &lt; lenA; indexA++) {</span>
+<span class="cstat-no" title="statement not covered" >		var statementA = statements[indexA];</span>
+<span class="cstat-no" title="statement not covered" >		if(this.isHoistedStatement(statementA))</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statementA);</span>
+	}
+<span class="cstat-no" title="statement not covered" >	for(var indexB = 0, lenB = statements.length; indexB &lt; lenB; indexB++) {</span>
+<span class="cstat-no" title="statement not covered" >		var statementB = statements[indexB];</span>
+<span class="cstat-no" title="statement not covered" >		if(!this.isHoistedStatement(statementB))</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statementB);</span>
+	}
+};
+&nbsp;
+Parser.prototype.isHoistedStatement = <span class="fstat-no" title="function not covered" >function isHoistedStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	switch(statement.type) {</span>
+		case "ImportDeclaration":
+		case "ExportAllDeclaration":
+		case "ExportNamedDeclaration":
+<span class="cstat-no" title="statement not covered" >			return true;</span>
+	}
+<span class="cstat-no" title="statement not covered" >	return false;</span>
+};
+&nbsp;
+Parser.prototype.walkStatement = <span class="fstat-no" title="function not covered" >function walkStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(this.applyPluginsBailResult1("statement", statement) !== undefined) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >	if(this["walk" + statement.type])</span>
+<span class="cstat-no" title="statement not covered" >		this["walk" + statement.type](statement);</span>
+};
+&nbsp;
+// Real Statements
+Parser.prototype.walkBlockStatement = <span class="fstat-no" title="function not covered" >function walkBlockStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkStatements(statement.body);</span>
+};
+&nbsp;
+Parser.prototype.walkExpressionStatement = <span class="fstat-no" title="function not covered" >function walkExpressionStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(statement.expression);</span>
+};
+&nbsp;
+Parser.prototype.walkIfStatement = <span class="fstat-no" title="function not covered" >function walkIfStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	var result = this.applyPluginsBailResult1("statement if", statement);</span>
+<span class="cstat-no" title="statement not covered" >	if(result === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.test);</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.consequent);</span>
+<span class="cstat-no" title="statement not covered" >		if(statement.alternate)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.alternate);</span>
+	} else {
+<span class="cstat-no" title="statement not covered" >		if(result)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.consequent);</span>
+		else <span class="cstat-no" title="statement not covered" >if(statement.alternate)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.alternate);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkLabeledStatement = <span class="fstat-no" title="function not covered" >function walkLabeledStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	var result = this.applyPluginsBailResult1("label " + statement.label.name, statement);</span>
+<span class="cstat-no" title="statement not covered" >	if(result !== true)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.body);</span>
+};
+&nbsp;
+Parser.prototype.walkWithStatement = <span class="fstat-no" title="function not covered" >function walkWithStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(statement.object);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkStatement(statement.body);</span>
+};
+&nbsp;
+Parser.prototype.walkSwitchStatement = <span class="fstat-no" title="function not covered" >function walkSwitchStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(statement.discriminant);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkSwitchCases(statement.cases);</span>
+};
+&nbsp;
+Parser.prototype.walkReturnStatement =
+	Parser.prototype.walkThrowStatement = <span class="fstat-no" title="function not covered" >function walkArgumentStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >		if(statement.argument)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(statement.argument);</span>
+	};
+&nbsp;
+Parser.prototype.walkTryStatement = <span class="fstat-no" title="function not covered" >function walkTryStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(this.scope.inTry) {</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.block);</span>
+	} else {
+<span class="cstat-no" title="statement not covered" >		this.scope.inTry = true;</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.block);</span>
+<span class="cstat-no" title="statement not covered" >		this.scope.inTry = false;</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(statement.handler)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkCatchClause(statement.handler);</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.finalizer)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.finalizer);</span>
+};
+&nbsp;
+Parser.prototype.walkWhileStatement =
+	Parser.prototype.walkDoWhileStatement = <span class="fstat-no" title="function not covered" >function walkLoopStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.test);</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.body);</span>
+	};
+&nbsp;
+Parser.prototype.walkForStatement = <span class="fstat-no" title="function not covered" >function walkForStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.init) {</span>
+<span class="cstat-no" title="statement not covered" >		if(statement.init.type === "VariableDeclaration")</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.init);</span>
+		else
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(statement.init);</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(statement.test)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.test);</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.update)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.update);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkStatement(statement.body);</span>
+};
+&nbsp;
+Parser.prototype.walkForInStatement = <span class="fstat-no" title="function not covered" >function walkForInStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.left.type === "VariableDeclaration")</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.left);</span>
+	else
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.left);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(statement.right);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkStatement(statement.body);</span>
+};
+&nbsp;
+Parser.prototype.walkForOfStatement = <span class="fstat-no" title="function not covered" >function walkForOfStatement(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.left.type === "VariableDeclaration")</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(statement.left);</span>
+	else
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.left);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(statement.right);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkStatement(statement.body);</span>
+};
+&nbsp;
+// Declarations
+Parser.prototype.walkFunctionDeclaration = <span class="fstat-no" title="function not covered" >function walkFunctionDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.scope.renames["$" + statement.id.name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >	this.scope.definitions.push(statement.id.name);</span>
+<span class="cstat-no" title="statement not covered" >	this.inScope(statement.params, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(statement.body.type === "BlockStatement")</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.body);</span>
+		else
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(statement.body);</span>
+	}.bind(this));
+};
+&nbsp;
+Parser.prototype.walkImportDeclaration = <span class="fstat-no" title="function not covered" >function walkImportDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	var source = statement.source.value;</span>
+<span class="cstat-no" title="statement not covered" >	this.applyPluginsBailResult("import", statement, source);</span>
+<span class="cstat-no" title="statement not covered" >	statement.specifiers.forEach(<span class="fstat-no" title="function not covered" >function(specifier) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var name = specifier.local.name;</span>
+<span class="cstat-no" title="statement not covered" >		this.scope.renames["$" + name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >		this.scope.definitions.push(name);</span>
+<span class="cstat-no" title="statement not covered" >		switch(specifier.type) {</span>
+			case "ImportDefaultSpecifier":
+<span class="cstat-no" title="statement not covered" >				this.applyPluginsBailResult("import specifier", statement, source, "default", name);</span>
+<span class="cstat-no" title="statement not covered" >				break;</span>
+			case "ImportSpecifier":
+<span class="cstat-no" title="statement not covered" >				this.applyPluginsBailResult("import specifier", statement, source, specifier.imported.name, name);</span>
+<span class="cstat-no" title="statement not covered" >				break;</span>
+			case "ImportNamespaceSpecifier":
+<span class="cstat-no" title="statement not covered" >				this.applyPluginsBailResult("import specifier", statement, source, null, name);</span>
+<span class="cstat-no" title="statement not covered" >				break;</span>
+		}
+	}, this);
+};
+&nbsp;
+Parser.prototype.walkExportNamedDeclaration = <span class="fstat-no" title="function not covered" >function walkExportNamedDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.source) {</span>
+<span class="cstat-no" title="statement not covered" >		var source = statement.source.value;</span>
+<span class="cstat-no" title="statement not covered" >		this.applyPluginsBailResult("export import", statement, source);</span>
+	} else {
+<span class="cstat-no" title="statement not covered" >		this.applyPluginsBailResult1("export", statement);</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(statement.declaration) {</span>
+<span class="cstat-no" title="statement not covered" >		if(/Expression$/.test(statement.declaration.type)) {</span>
+<span class="cstat-no" title="statement not covered" >			throw new Error("Doesn't occur?");</span>
+		} else {
+<span class="cstat-no" title="statement not covered" >			if(!this.applyPluginsBailResult("export declaration", statement, statement.declaration)) {</span>
+<span class="cstat-no" title="statement not covered" >				var pos = this.scope.definitions.length;</span>
+<span class="cstat-no" title="statement not covered" >				this.walkStatement(statement.declaration);</span>
+<span class="cstat-no" title="statement not covered" >				var newDefs = this.scope.definitions.slice(pos);</span>
+<span class="cstat-no" title="statement not covered" >				for(var index = newDefs.length - 1; index &gt;= 0; index--) {</span>
+<span class="cstat-no" title="statement not covered" >					var def = newDefs[index];</span>
+<span class="cstat-no" title="statement not covered" >					this.applyPluginsBailResult("export specifier", statement, def, def, index);</span>
+				}
+			}
+		}
+	}
+<span class="cstat-no" title="statement not covered" >	if(statement.specifiers) {</span>
+<span class="cstat-no" title="statement not covered" >		for(var specifierIndex = 0; specifierIndex &lt; statement.specifiers.length; specifierIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >			var specifier = statement.specifiers[specifierIndex];</span>
+<span class="cstat-no" title="statement not covered" >			switch(specifier.type) {</span>
+				case "ExportSpecifier":
+<span class="cstat-no" title="statement not covered" >					var name = specifier.exported.name;</span>
+<span class="cstat-no" title="statement not covered" >					if(source)</span>
+<span class="cstat-no" title="statement not covered" >						this.applyPluginsBailResult("export import specifier", statement, source, specifier.local.name, name, specifierIndex);</span>
+					else
+<span class="cstat-no" title="statement not covered" >						this.applyPluginsBailResult("export specifier", statement, specifier.local.name, name, specifierIndex);</span>
+<span class="cstat-no" title="statement not covered" >					break;</span>
+			}
+		}
+	}
+};
+&nbsp;
+Parser.prototype.walkExportDefaultDeclaration = <span class="fstat-no" title="function not covered" >function walkExportDefaultDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.applyPluginsBailResult1("export", statement);</span>
+<span class="cstat-no" title="statement not covered" >	if(/Declaration$/.test(statement.declaration.type)) {</span>
+<span class="cstat-no" title="statement not covered" >		if(!this.applyPluginsBailResult("export declaration", statement, statement.declaration)) {</span>
+<span class="cstat-no" title="statement not covered" >			var pos = this.scope.definitions.length;</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(statement.declaration);</span>
+<span class="cstat-no" title="statement not covered" >			var newDefs = this.scope.definitions.slice(pos);</span>
+<span class="cstat-no" title="statement not covered" >			for(var index = 0, len = newDefs.length; index &lt; len; index++) {</span>
+<span class="cstat-no" title="statement not covered" >				var def = newDefs[index];</span>
+<span class="cstat-no" title="statement not covered" >				this.applyPluginsBailResult("export specifier", statement, def, "default");</span>
+			}
+		}
+	} else {
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(statement.declaration);</span>
+<span class="cstat-no" title="statement not covered" >		if(!this.applyPluginsBailResult("export expression", statement, statement.declaration)) {</span>
+<span class="cstat-no" title="statement not covered" >			this.applyPluginsBailResult("export specifier", statement, statement.declaration, "default");</span>
+		}
+	}
+};
+&nbsp;
+Parser.prototype.walkExportAllDeclaration = <span class="fstat-no" title="function not covered" >function walkExportAllDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	var source = statement.source.value;</span>
+<span class="cstat-no" title="statement not covered" >	this.applyPluginsBailResult("export import", statement, source);</span>
+<span class="cstat-no" title="statement not covered" >	this.applyPluginsBailResult("export import specifier", statement, source, null, null, 0);</span>
+};
+&nbsp;
+Parser.prototype.walkVariableDeclaration = <span class="fstat-no" title="function not covered" >function walkVariableDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	if(statement.declarations)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkVariableDeclarators(statement.declarations);</span>
+};
+&nbsp;
+Parser.prototype.walkClassDeclaration = <span class="fstat-no" title="function not covered" >function walkClassDeclaration(statement) {</span>
+<span class="cstat-no" title="statement not covered" >	this.scope.renames["$" + statement.id.name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >	this.scope.definitions.push(statement.id.name);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkClass(statement);</span>
+};
+&nbsp;
+Parser.prototype.walkSwitchCases = <span class="fstat-no" title="function not covered" >function walkSwitchCases(switchCases) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var index = 0, len = switchCases.length; index &lt; len; index++) {</span>
+<span class="cstat-no" title="statement not covered" >		var switchCase = switchCases[index];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(switchCase.test) {</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(switchCase.test);</span>
+		}
+<span class="cstat-no" title="statement not covered" >		this.walkStatements(switchCase.consequent);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkCatchClause = <span class="fstat-no" title="function not covered" >function walkCatchClause(catchClause) {</span>
+<span class="cstat-no" title="statement not covered" >	if(catchClause.guard)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(catchClause.guard);</span>
+<span class="cstat-no" title="statement not covered" >	this.inScope([catchClause.param], <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatement(catchClause.body);</span>
+	}.bind(this));
+};
+&nbsp;
+Parser.prototype.walkVariableDeclarators = <span class="fstat-no" title="function not covered" >function walkVariableDeclarators(declarators) {</span>
+<span class="cstat-no" title="statement not covered" >	var _this = this;</span>
+<span class="cstat-no" title="statement not covered" >	declarators.forEach(<span class="fstat-no" title="function not covered" >function(declarator) {</span></span>
+<span class="cstat-no" title="statement not covered" >		switch(declarator.type) {</span>
+			case "VariableDeclarator":
+<span class="cstat-no" title="statement not covered" >				var renameIdentifier = declarator.init &amp;&amp; _this.getRenameIdentifier(declarator.init);</span>
+<span class="cstat-no" title="statement not covered" >				if(renameIdentifier &amp;&amp; declarator.id.type === "Identifier" &amp;&amp; _this.applyPluginsBailResult1("can-rename " + renameIdentifier, declarator.init)) {</span>
+					// renaming with "var a = b;"
+<span class="cstat-no" title="statement not covered" >					if(!_this.applyPluginsBailResult1("rename " + renameIdentifier, declarator.init)) {</span>
+<span class="cstat-no" title="statement not covered" >						_this.scope.renames["$" + declarator.id.name] = _this.scope.renames["$" + renameIdentifier] || renameIdentifier;</span>
+<span class="cstat-no" title="statement not covered" >						var idx = _this.scope.definitions.indexOf(declarator.id.name);</span>
+<span class="cstat-no" title="statement not covered" >						if(idx &gt;= 0) <span class="cstat-no" title="statement not covered" >_this.scope.definitions.splice(idx, 1);</span></span>
+					}
+				} else {
+<span class="cstat-no" title="statement not covered" >					_this.walkPattern(declarator.id);</span>
+<span class="cstat-no" title="statement not covered" >					_this.enterPattern(declarator.id, <span class="fstat-no" title="function not covered" >function(name, decl) {</span></span>
+<span class="cstat-no" title="statement not covered" >						if(!_this.applyPluginsBailResult1("var " + name, decl)) {</span>
+<span class="cstat-no" title="statement not covered" >							_this.scope.renames["$" + name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >							_this.scope.definitions.push(name);</span>
+						}
+					});
+<span class="cstat-no" title="statement not covered" >					if(declarator.init)</span>
+<span class="cstat-no" title="statement not covered" >						_this.walkExpression(declarator.init);</span>
+				}
+<span class="cstat-no" title="statement not covered" >				break;</span>
+		}
+	});
+};
+&nbsp;
+Parser.prototype.walkPattern = <span class="fstat-no" title="function not covered" >function walkPattern(pattern) {</span>
+<span class="cstat-no" title="statement not covered" >	if(pattern.type === "Identifier")</span>
+<span class="cstat-no" title="statement not covered" >		return;</span>
+<span class="cstat-no" title="statement not covered" >	if(this["walk" + pattern.type])</span>
+<span class="cstat-no" title="statement not covered" >		this["walk" + pattern.type](pattern);</span>
+};
+&nbsp;
+Parser.prototype.walkObjectPattern = <span class="fstat-no" title="function not covered" >function walkObjectPattern(pattern) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var i = 0, len = pattern.properties.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >		var prop = pattern.properties[i];</span>
+<span class="cstat-no" title="statement not covered" >		if(prop) {</span>
+<span class="cstat-no" title="statement not covered" >			if(prop.computed)</span>
+<span class="cstat-no" title="statement not covered" >				this.walkExpression(prop.key);</span>
+<span class="cstat-no" title="statement not covered" >			if(prop.value)</span>
+<span class="cstat-no" title="statement not covered" >				this.walkPattern(prop.value);</span>
+		}
+	}
+};
+&nbsp;
+Parser.prototype.walkArrayPattern = <span class="fstat-no" title="function not covered" >function walkArrayPattern(pattern) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var i = 0, len = pattern.elements.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >		var element = pattern.elements[i];</span>
+<span class="cstat-no" title="statement not covered" >		if(element)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkPattern(element);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkRestElement = <span class="fstat-no" title="function not covered" >function walkRestElement(pattern) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkPattern(pattern.argument);</span>
+};
+&nbsp;
+Parser.prototype.walkExpressions = <span class="fstat-no" title="function not covered" >function walkExpressions(expressions) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var expressionsIndex = 0, len = expressions.length; expressionsIndex &lt; len; expressionsIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >		var expression = expressions[expressionsIndex];</span>
+<span class="cstat-no" title="statement not covered" >		if(expression)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkExpression = <span class="fstat-no" title="function not covered" >function walkExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(this["walk" + expression.type])</span>
+<span class="cstat-no" title="statement not covered" >		return this["walk" + expression.type](expression);</span>
+};
+&nbsp;
+Parser.prototype.walkAwaitExpression = <span class="fstat-no" title="function not covered" >function walkAwaitExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	var argument = expression.argument;</span>
+<span class="cstat-no" title="statement not covered" >	if(this["walk" + argument.type])</span>
+<span class="cstat-no" title="statement not covered" >		return this["walk" + argument.type](argument);</span>
+};
+&nbsp;
+Parser.prototype.walkArrayExpression = <span class="fstat-no" title="function not covered" >function walkArrayExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.elements)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpressions(expression.elements);</span>
+};
+&nbsp;
+Parser.prototype.walkSpreadElement = <span class="fstat-no" title="function not covered" >function walkSpreadElement(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.argument)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.argument);</span>
+};
+&nbsp;
+Parser.prototype.walkObjectExpression = <span class="fstat-no" title="function not covered" >function walkObjectExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var propIndex = 0, len = expression.properties.length; propIndex &lt; len; propIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >		var prop = expression.properties[propIndex];</span>
+<span class="cstat-no" title="statement not covered" >		if(prop.computed)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(prop.key);</span>
+<span class="cstat-no" title="statement not covered" >		if(prop.shorthand)</span>
+<span class="cstat-no" title="statement not covered" >			this.scope.inShorthand = true;</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(prop.value);</span>
+<span class="cstat-no" title="statement not covered" >		if(prop.shorthand)</span>
+<span class="cstat-no" title="statement not covered" >			this.scope.inShorthand = false;</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkFunctionExpression = <span class="fstat-no" title="function not covered" >function walkFunctionExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	this.inScope(expression.params, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expression.body.type === "BlockStatement")</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(expression.body);</span>
+		else
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.body);</span>
+	}.bind(this));
+};
+&nbsp;
+Parser.prototype.walkArrowFunctionExpression = <span class="fstat-no" title="function not covered" >function walkArrowFunctionExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	this.inScope(expression.params, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >		if(expression.body.type === "BlockStatement")</span>
+<span class="cstat-no" title="statement not covered" >			this.walkStatement(expression.body);</span>
+		else
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.body);</span>
+	}.bind(this));
+};
+&nbsp;
+Parser.prototype.walkSequenceExpression = <span class="fstat-no" title="function not covered" >function walkSequenceExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.expressions)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpressions(expression.expressions);</span>
+};
+&nbsp;
+Parser.prototype.walkUpdateExpression = <span class="fstat-no" title="function not covered" >function walkUpdateExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(expression.argument);</span>
+};
+&nbsp;
+Parser.prototype.walkUnaryExpression = <span class="fstat-no" title="function not covered" >function walkUnaryExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.operator === "typeof") {</span>
+<span class="cstat-no" title="statement not covered" >		var expr = expression.argument;</span>
+<span class="cstat-no" title="statement not covered" >		var exprName = [];</span>
+<span class="cstat-no" title="statement not covered" >		while(expr.type === "MemberExpression" &amp;&amp;</span>
+			expr.property.type === (expr.computed ? "Literal" : "Identifier")
+		) {
+<span class="cstat-no" title="statement not covered" >			exprName.unshift(expr.property.name || expr.property.value);</span>
+<span class="cstat-no" title="statement not covered" >			expr = expr.object;</span>
+		}
+<span class="cstat-no" title="statement not covered" >		if(expr.type === "Identifier" &amp;&amp; this.scope.definitions.indexOf(expr.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >			exprName.unshift(this.scope.renames["$" + expr.name] || expr.name);</span>
+<span class="cstat-no" title="statement not covered" >			exprName = exprName.join(".");</span>
+<span class="cstat-no" title="statement not covered" >			var result = this.applyPluginsBailResult1("typeof " + exprName, expression);</span>
+<span class="cstat-no" title="statement not covered" >			if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >				return;</span>
+		}
+	}
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(expression.argument);</span>
+};
+&nbsp;
+Parser.prototype.walkBinaryExpression =
+	Parser.prototype.walkLogicalExpression = <span class="fstat-no" title="function not covered" >function walkLeftRightExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.left);</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.right);</span>
+	};
+&nbsp;
+Parser.prototype.walkAssignmentExpression = <span class="fstat-no" title="function not covered" >function walkAssignmentExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	var renameIdentifier = this.getRenameIdentifier(expression.right);</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.left.type === "Identifier" &amp;&amp; renameIdentifier &amp;&amp; this.applyPluginsBailResult1("can-rename " + renameIdentifier, expression.right)) {</span>
+		// renaming "a = b;"
+<span class="cstat-no" title="statement not covered" >		if(!this.applyPluginsBailResult1("rename " + renameIdentifier, expression.right)) {</span>
+<span class="cstat-no" title="statement not covered" >			this.scope.renames["$" + expression.left.name] = renameIdentifier;</span>
+<span class="cstat-no" title="statement not covered" >			var idx = this.scope.definitions.indexOf(expression.left.name);</span>
+<span class="cstat-no" title="statement not covered" >			if(idx &gt;= 0) <span class="cstat-no" title="statement not covered" >this.scope.definitions.splice(idx, 1);</span></span>
+		}
+	} else <span class="cstat-no" title="statement not covered" >if(expression.left.type === "Identifier") {</span>
+<span class="cstat-no" title="statement not covered" >		if(!this.applyPluginsBailResult1("assigned " + expression.left.name, expression)) {</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.right);</span>
+		}
+<span class="cstat-no" title="statement not covered" >		this.scope.renames["$" + expression.left.name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >		if(!this.applyPluginsBailResult1("assign " + expression.left.name, expression)) {</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.left);</span>
+		}
+	} else {
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.right);</span>
+<span class="cstat-no" title="statement not covered" >		this.scope.renames["$" + expression.left.name] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.left);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkConditionalExpression = <span class="fstat-no" title="function not covered" >function walkConditionalExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	var result = this.applyPluginsBailResult1("expression ?:", expression);</span>
+<span class="cstat-no" title="statement not covered" >	if(result === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.test);</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.consequent);</span>
+<span class="cstat-no" title="statement not covered" >		if(expression.alternate)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.alternate);</span>
+	} else {
+<span class="cstat-no" title="statement not covered" >		if(result)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.consequent);</span>
+		else <span class="cstat-no" title="statement not covered" >if(expression.alternate)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.alternate);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkNewExpression = <span class="fstat-no" title="function not covered" >function walkNewExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(expression.callee);</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.arguments)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpressions(expression.arguments);</span>
+};
+&nbsp;
+Parser.prototype.walkYieldExpression = <span class="fstat-no" title="function not covered" >function walkYieldExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.argument)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.argument);</span>
+};
+&nbsp;
+Parser.prototype.walkTemplateLiteral = <span class="fstat-no" title="function not covered" >function walkTemplateLiteral(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.expressions)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpressions(expression.expressions);</span>
+};
+&nbsp;
+Parser.prototype.walkTaggedTemplateExpression = <span class="fstat-no" title="function not covered" >function walkTaggedTemplateExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.tag)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.tag);</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.quasi &amp;&amp; expression.quasi.expressions)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpressions(expression.quasi.expressions);</span>
+};
+&nbsp;
+Parser.prototype.walkClassExpression = <span class="fstat-no" title="function not covered" >function walkClassExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	this.walkClass(expression);</span>
+};
+&nbsp;
+Parser.prototype.walkCallExpression = <span class="fstat-no" title="function not covered" >function walkCallExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	var result;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >	function walkIIFE(functionExpression, options) {</span>
+<span class="cstat-no" title="statement not covered" >		var params = functionExpression.params;</span>
+<span class="cstat-no" title="statement not covered" >		var args = options.map(<span class="fstat-no" title="function not covered" >function(arg) {</span></span>
+<span class="cstat-no" title="statement not covered" >			var renameIdentifier = this.getRenameIdentifier(arg);</span>
+<span class="cstat-no" title="statement not covered" >			if(renameIdentifier &amp;&amp; this.applyPluginsBailResult1("can-rename " + renameIdentifier, arg)) {</span>
+<span class="cstat-no" title="statement not covered" >				if(!this.applyPluginsBailResult1("rename " + renameIdentifier, arg))</span>
+<span class="cstat-no" title="statement not covered" >					return renameIdentifier;</span>
+			}
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(arg);</span>
+		}, this);
+<span class="cstat-no" title="statement not covered" >		this.inScope(params.filter(<span class="fstat-no" title="function not covered" >function(identifier, idx) {</span></span>
+<span class="cstat-no" title="statement not covered" >			return !args[idx];</span>
+		}), <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >			for(var i = 0; i &lt; args.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >				var param = args[i];</span>
+<span class="cstat-no" title="statement not covered" >				if(!param) <span class="cstat-no" title="statement not covered" >continue;</span></span>
+<span class="cstat-no" title="statement not covered" >				if(!params[i] || params[i].type !== "Identifier") <span class="cstat-no" title="statement not covered" >continue;</span></span>
+<span class="cstat-no" title="statement not covered" >				this.scope.renames["$" + params[i].name] = param;</span>
+			}
+<span class="cstat-no" title="statement not covered" >			if(functionExpression.body.type === "BlockStatement")</span>
+<span class="cstat-no" title="statement not covered" >				this.walkStatement(functionExpression.body);</span>
+			else
+<span class="cstat-no" title="statement not covered" >				this.walkExpression(functionExpression.body);</span>
+		}.bind(this));
+	}
+<span class="cstat-no" title="statement not covered" >	if(expression.callee.type === "MemberExpression" &amp;&amp;</span>
+		expression.callee.object.type === "FunctionExpression" &amp;&amp;
+		!expression.callee.computed &amp;&amp;
+		(["call", "bind"]).indexOf(expression.callee.property.name) &gt;= 0 &amp;&amp;
+		expression.arguments &amp;&amp;
+		expression.arguments.length &gt; 1
+	) {
+		// (function(...) { }.call/bind(?, ...))
+<span class="cstat-no" title="statement not covered" >		walkIIFE.call(this, expression.callee.object, expression.arguments.slice(1));</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.arguments[0]);</span>
+	} else <span class="cstat-no" title="statement not covered" >if(expression.callee.type === "FunctionExpression" &amp;&amp; expression.arguments) {</span>
+		// (function(...) { }(...))
+<span class="cstat-no" title="statement not covered" >		walkIIFE.call(this, expression.callee, expression.arguments);</span>
+	} else <span class="cstat-no" title="statement not covered" >if(expression.callee.type === "Import") {</span>
+<span class="cstat-no" title="statement not covered" >		result = this.applyPluginsBailResult1("import-call", expression);</span>
+<span class="cstat-no" title="statement not covered" >		if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >			return;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(expression.arguments)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpressions(expression.arguments);</span>
+	} else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var callee = this.evaluateExpression(expression.callee);</span>
+<span class="cstat-no" title="statement not covered" >		if(callee.isIdentifier()) {</span>
+<span class="cstat-no" title="statement not covered" >			result = this.applyPluginsBailResult1("call " + callee.identifier, expression);</span>
+<span class="cstat-no" title="statement not covered" >			if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >				return;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(expression.callee)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpression(expression.callee);</span>
+<span class="cstat-no" title="statement not covered" >		if(expression.arguments)</span>
+<span class="cstat-no" title="statement not covered" >			this.walkExpressions(expression.arguments);</span>
+	}
+};
+&nbsp;
+Parser.prototype.walkMemberExpression = <span class="fstat-no" title="function not covered" >function walkMemberExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	var expr = expression;</span>
+<span class="cstat-no" title="statement not covered" >	var exprName = [];</span>
+<span class="cstat-no" title="statement not covered" >	while(expr.type === "MemberExpression" &amp;&amp;</span>
+		expr.property.type === (expr.computed ? "Literal" : "Identifier")
+	) {
+<span class="cstat-no" title="statement not covered" >		exprName.unshift(expr.property.name || expr.property.value);</span>
+<span class="cstat-no" title="statement not covered" >		expr = expr.object;</span>
+	}
+<span class="cstat-no" title="statement not covered" >	if(expr.type === "Identifier" &amp;&amp; this.scope.definitions.indexOf(expr.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >		exprName.unshift(this.scope.renames["$" + expr.name] || expr.name);</span>
+<span class="cstat-no" title="statement not covered" >		var result = this.applyPluginsBailResult1("expression " + exprName.join("."), expression);</span>
+<span class="cstat-no" title="statement not covered" >		if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >			return;</span>
+<span class="cstat-no" title="statement not covered" >		exprName[exprName.length - 1] = "*";</span>
+<span class="cstat-no" title="statement not covered" >		result = this.applyPluginsBailResult1("expression " + exprName.join("."), expression);</span>
+<span class="cstat-no" title="statement not covered" >		if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >			return;</span>
+	}
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(expression.object);</span>
+<span class="cstat-no" title="statement not covered" >	if(expression.computed === true)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkExpression(expression.property);</span>
+};
+&nbsp;
+Parser.prototype.walkIdentifier = <span class="fstat-no" title="function not covered" >function walkIdentifier(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	if(this.scope.definitions.indexOf(expression.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >		var result = this.applyPluginsBailResult1("expression " + (this.scope.renames["$" + expression.name] || expression.name), expression);</span>
+<span class="cstat-no" title="statement not covered" >		if(result === true)</span>
+<span class="cstat-no" title="statement not covered" >			return;</span>
+	}
+};
+&nbsp;
+Parser.prototype.inScope = <span class="fstat-no" title="function not covered" >function inScope(params, fn) {</span>
+<span class="cstat-no" title="statement not covered" >	var oldScope = this.scope;</span>
+<span class="cstat-no" title="statement not covered" >	var _this = this;</span>
+<span class="cstat-no" title="statement not covered" >	this.scope = {</span>
+		inTry: false,
+		inShorthand: false,
+		definitions: oldScope.definitions.slice(),
+		renames: Object.create(oldScope.renames)
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	for(var paramIndex = 0, len = params.length; paramIndex &lt; len; paramIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >		var param = params[paramIndex];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(typeof param !== "string") {</span>
+<span class="cstat-no" title="statement not covered" >			_this.enterPattern(param, <span class="fstat-no" title="function not covered" >function(param) {</span></span>
+<span class="cstat-no" title="statement not covered" >				_this.scope.renames["$" + param] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >				_this.scope.definitions.push(param);</span>
+			});
+		} else {
+<span class="cstat-no" title="statement not covered" >			_this.scope.renames["$" + param] = undefined;</span>
+<span class="cstat-no" title="statement not covered" >			_this.scope.definitions.push(param);</span>
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	fn();</span>
+<span class="cstat-no" title="statement not covered" >	_this.scope = oldScope;</span>
+};
+&nbsp;
+Parser.prototype.enterPattern = <span class="fstat-no" title="function not covered" >function enterPattern(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	if(pattern &amp;&amp; this["enter" + pattern.type])</span>
+<span class="cstat-no" title="statement not covered" >		this["enter" + pattern.type](pattern, onIdent);</span>
+};
+&nbsp;
+Parser.prototype.enterIdentifier = <span class="fstat-no" title="function not covered" >function enterIdentifier(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	onIdent(pattern.name, pattern);</span>
+};
+&nbsp;
+Parser.prototype.enterObjectPattern = <span class="fstat-no" title="function not covered" >function enterObjectPattern(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var propIndex = 0, len = pattern.properties.length; propIndex &lt; len; propIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >		var prop = pattern.properties[propIndex];</span>
+<span class="cstat-no" title="statement not covered" >		this.enterPattern(prop.value, onIdent);</span>
+	}
+};
+&nbsp;
+Parser.prototype.enterArrayPattern = <span class="fstat-no" title="function not covered" >function enterArrayPattern(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	for(var elementIndex = 0, len = pattern.elements.length; elementIndex &lt; len; elementIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >		var element = pattern.elements[elementIndex];</span>
+<span class="cstat-no" title="statement not covered" >		this.enterPattern(element, onIdent);</span>
+	}
+};
+&nbsp;
+Parser.prototype.enterRestElement = <span class="fstat-no" title="function not covered" >function enterRestElement(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	this.enterPattern(pattern.argument, onIdent);</span>
+};
+&nbsp;
+Parser.prototype.enterAssignmentPattern = <span class="fstat-no" title="function not covered" >function enterAssignmentPattern(pattern, onIdent) {</span>
+<span class="cstat-no" title="statement not covered" >	this.enterPattern(pattern.left, onIdent);</span>
+<span class="cstat-no" title="statement not covered" >	this.walkExpression(pattern.right);</span>
+};
+&nbsp;
+Parser.prototype.evaluateExpression = <span class="fstat-no" title="function not covered" >function evaluateExpression(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	try {</span>
+<span class="cstat-no" title="statement not covered" >		var result = this.applyPluginsBailResult1("evaluate " + expression.type, expression);</span>
+<span class="cstat-no" title="statement not covered" >		if(result !== undefined)</span>
+<span class="cstat-no" title="statement not covered" >			return result;</span>
+	} catch(e) {
+<span class="cstat-no" title="statement not covered" >		console.warn(e);</span>
+		// ignore error
+	}
+<span class="cstat-no" title="statement not covered" >	return new BasicEvaluatedExpression().setRange(expression.range);</span>
+};
+&nbsp;
+Parser.prototype.parseString = <span class="fstat-no" title="function not covered" >function parseString(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	switch(expression.type) {</span>
+		case "BinaryExpression":
+<span class="cstat-no" title="statement not covered" >			if(expression.operator === "+")</span>
+<span class="cstat-no" title="statement not covered" >				return this.parseString(expression.left) + this.parseString(expression.right);</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case "Literal":
+<span class="cstat-no" title="statement not covered" >			return expression.value + "";</span>
+	}
+<span class="cstat-no" title="statement not covered" >	throw new Error(expression.type + " is not supported as parameter for require");</span>
+};
+&nbsp;
+Parser.prototype.parseCalculatedString = <span class="fstat-no" title="function not covered" >function parseCalculatedString(expression) {</span>
+<span class="cstat-no" title="statement not covered" >	switch(expression.type) {</span>
+		case "BinaryExpression":
+<span class="cstat-no" title="statement not covered" >			if(expression.operator === "+") {</span>
+<span class="cstat-no" title="statement not covered" >				var left = this.parseCalculatedString(expression.left);</span>
+<span class="cstat-no" title="statement not covered" >				var right = this.parseCalculatedString(expression.right);</span>
+<span class="cstat-no" title="statement not covered" >				if(left.code) {</span>
+<span class="cstat-no" title="statement not covered" >					return {</span>
+						range: left.range,
+						value: left.value,
+						code: true
+					};
+				} else <span class="cstat-no" title="statement not covered" >if(right.code) {</span>
+<span class="cstat-no" title="statement not covered" >					return {</span>
+						range: [left.range[0], right.range ? right.range[1] : left.range[1]],
+						value: left.value + right.value,
+						code: true
+					};
+				} else {
+<span class="cstat-no" title="statement not covered" >					return {</span>
+						range: [left.range[0], right.range[1]],
+						value: left.value + right.value
+					};
+				}
+			}
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		case "ConditionalExpression":
+<span class="cstat-no" title="statement not covered" >			var consequent = this.parseCalculatedString(expression.consequent);</span>
+<span class="cstat-no" title="statement not covered" >			var alternate = this.parseCalculatedString(expression.alternate);</span>
+<span class="cstat-no" title="statement not covered" >			var items = [];</span>
+<span class="cstat-no" title="statement not covered" >			if(consequent.conditional)</span>
+<span class="cstat-no" title="statement not covered" >				Array.prototype.push.apply(items, consequent.conditional);</span>
+			else <span class="cstat-no" title="statement not covered" >if(!consequent.code)</span>
+<span class="cstat-no" title="statement not covered" >				items.push(consequent);</span>
+			else <span class="cstat-no" title="statement not covered" >break;</span>
+<span class="cstat-no" title="statement not covered" >			if(alternate.conditional)</span>
+<span class="cstat-no" title="statement not covered" >				Array.prototype.push.apply(items, alternate.conditional);</span>
+			else <span class="cstat-no" title="statement not covered" >if(!alternate.code)</span>
+<span class="cstat-no" title="statement not covered" >				items.push(alternate);</span>
+			else <span class="cstat-no" title="statement not covered" >break;</span>
+<span class="cstat-no" title="statement not covered" >			return {</span>
+				value: "",
+				code: true,
+				conditional: items
+			};
+		case "Literal":
+<span class="cstat-no" title="statement not covered" >			return {</span>
+				range: expression.range,
+				value: expression.value + ""
+			};
+	}
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		value: "",
+		code: true
+	};
+};
+&nbsp;
+["parseString", "parseCalculatedString"].forEach(function(fn) {
+	Parser.prototype[fn + "Array"] = <span class="fstat-no" title="function not covered" >function parseXXXArray(expression) {</span>
+<span class="cstat-no" title="statement not covered" >		switch(expression.type) {</span>
+			case "ArrayExpression":
+<span class="cstat-no" title="statement not covered" >				var arr = [];</span>
+<span class="cstat-no" title="statement not covered" >				if(expression.elements)</span>
+<span class="cstat-no" title="statement not covered" >					expression.elements.forEach(<span class="fstat-no" title="function not covered" >function(expr) {</span></span>
+<span class="cstat-no" title="statement not covered" >						arr.push(this[fn](expr));</span>
+					}, this);
+<span class="cstat-no" title="statement not covered" >				return arr;</span>
+		}
+<span class="cstat-no" title="statement not covered" >		return [this[fn](expression)];</span>
+	};
+});
+&nbsp;
+var POSSIBLE_AST_OPTIONS = [{
+	ranges: true,
+	locations: true,
+	ecmaVersion: 2017,
+	sourceType: "module",
+	plugins: {
+		dynamicImport: true
+	}
+}, {
+	ranges: true,
+	locations: true,
+	ecmaVersion: 2017,
+	sourceType: "script",
+	plugins: {
+		dynamicImport: true
+	}
+}];
+&nbsp;
+Parser.prototype.parse = <span class="fstat-no" title="function not covered" >function parse(source, initialState) {</span>
+<span class="cstat-no" title="statement not covered" >	var ast, comments = [];</span>
+<span class="cstat-no" title="statement not covered" >	for(var i = 0, len = POSSIBLE_AST_OPTIONS.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >		if(!ast) {</span>
+<span class="cstat-no" title="statement not covered" >			try {</span>
+<span class="cstat-no" title="statement not covered" >				comments.length = 0;</span>
+<span class="cstat-no" title="statement not covered" >				POSSIBLE_AST_OPTIONS[i].onComment = comments;</span>
+<span class="cstat-no" title="statement not covered" >				ast = acorn.parse(source, POSSIBLE_AST_OPTIONS[i]);</span>
+			} catch(e) {
+				// ignore the error
+			}
+		}
+	}
+<span class="cstat-no" title="statement not covered" >	if(!ast) {</span>
+		// for the error
+<span class="cstat-no" title="statement not covered" >		ast = acorn.parse(source, {</span>
+			ranges: true,
+			locations: true,
+			ecmaVersion: 2017,
+			sourceType: "module",
+			plugins: {
+				dynamicImport: true
+			},
+			onComment: comments
+		});
+	}
+<span class="cstat-no" title="statement not covered" >	if(!ast || typeof ast !== "object")</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error("Source couldn't be parsed");</span>
+<span class="cstat-no" title="statement not covered" >	var oldScope = this.scope;</span>
+<span class="cstat-no" title="statement not covered" >	var oldState = this.state;</span>
+<span class="cstat-no" title="statement not covered" >	this.scope = {</span>
+		inTry: false,
+		definitions: [],
+		renames: {}
+	};
+<span class="cstat-no" title="statement not covered" >	var state = this.state = initialState || {};</span>
+<span class="cstat-no" title="statement not covered" >	if(this.applyPluginsBailResult("program", ast, comments) === undefined)</span>
+<span class="cstat-no" title="statement not covered" >		this.walkStatements(ast.body);</span>
+<span class="cstat-no" title="statement not covered" >	this.scope = oldScope;</span>
+<span class="cstat-no" title="statement not covered" >	this.state = oldState;</span>
+<span class="cstat-no" title="statement not covered" >	return state;</span>
+};
+&nbsp;
+Parser.prototype.evaluate = <span class="fstat-no" title="function not covered" >function evaluate(source) {</span>
+<span class="cstat-no" title="statement not covered" >	var ast = acorn.parse("(" + source + ")", {</span>
+		ranges: true,
+		locations: true,
+		ecmaVersion: 2017,
+		sourceType: "module",
+		plugins: {
+			dynamicImport: true
+		}
+	});
+<span class="cstat-no" title="statement not covered" >	if(!ast || typeof ast !== "object" || ast.type !== "Program")</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error("evaluate: Source couldn't be parsed");</span>
+<span class="cstat-no" title="statement not covered" >	if(ast.body.length !== 1 || ast.body[0].type !== "ExpressionStatement")</span>
+<span class="cstat-no" title="statement not covered" >		throw new Error("evaluate: Source is not a expression");</span>
+<span class="cstat-no" title="statement not covered" >	return this.evaluateExpression(ast.body[0].expression);</span>
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 06:35:06 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
