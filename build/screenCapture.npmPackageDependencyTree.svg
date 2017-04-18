@@ -8,7 +8,7 @@
 <tspan x="10" y="90">  ├── acorn@5.0.3 </tspan>
 <tspan x="10" y="106">  ├─┬ acorn-dynamic-import@2.0.2 </tspan>
 <tspan x="10" y="122">  │ └── acorn@4.0.11 </tspan>
-<tspan x="10" y="138">  ├─┬ ajv@4.11.6 </tspan>
+<tspan x="10" y="138">  ├─┬ ajv@4.11.7 </tspan>
 <tspan x="10" y="154">  │ ├── co@4.6.0 </tspan>
 <tspan x="10" y="170">  │ └─┬ json-stable-stringify@1.0.1 </tspan>
 <tspan x="10" y="186">  │   └── jsonify@0.0.0 </tspan>
@@ -124,7 +124,7 @@
 <tspan x="10" y="1946">  │   │ ├── arrify@1.0.1 </tspan>
 <tspan x="10" y="1962">  │   │ └─┬ micromatch@2.3.11 </tspan>
 <tspan x="10" y="1978">  │   │   ├─┬ arr-diff@2.0.0 </tspan>
-<tspan x="10" y="1994">  │   │   │ └── arr-flatten@1.0.2 </tspan>
+<tspan x="10" y="1994">  │   │   │ └── arr-flatten@1.0.3 </tspan>
 <tspan x="10" y="2010">  │   │   ├── array-unique@0.2.1 </tspan>
 <tspan x="10" y="2026">  │   │   ├─┬ braces@1.8.5 </tspan>
 <tspan x="10" y="2042">  │   │   │ ├─┬ expand-range@1.8.2 </tspan>
