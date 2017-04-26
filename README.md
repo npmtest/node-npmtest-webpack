@@ -1,6 +1,6 @@
 # npmtest-webpack
 
-#### test coverage for  [webpack (v2.4.1)](https://github.com/webpack/webpack)  [![npm package](https://img.shields.io/npm/v/npmtest-webpack.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-webpack) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-webpack.svg)](https://travis-ci.org/npmtest/node-npmtest-webpack)
+#### basic test coverage for  [webpack (v2.4.1)](https://github.com/webpack/webpack)  [![npm package](https://img.shields.io/npm/v/npmtest-webpack.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-webpack) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-webpack.svg)](https://travis-ci.org/npmtest/node-npmtest-webpack)
 
 #### Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-webpack/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-webpack/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-webpack/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-webpack/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-webpack/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-webpack/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-webpack/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-webpack/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-webpack/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-webpack/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-webpack/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-webpack/build/coverage.html/index.html)
 
