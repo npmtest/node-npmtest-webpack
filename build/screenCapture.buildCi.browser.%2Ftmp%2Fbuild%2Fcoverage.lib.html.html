@@ -1,5 +1,5 @@
 <html lang="en"><head>
-    <title>Code coverage report for node-npmtest-webpack/node_modules/webpack/lib/IgnorePlugin.js</title>
+    <title>Code coverage report for node-npmtest-webpack/node_modules/webpack/bin/convert-argv.js</title>
     <meta charset="utf-8">
     <style>
         body, html {
@@ -192,23 +192,23 @@
     <h1 style="font-weight: bold;">
         <a href="https://github.com/npmtest/node-npmtest-webpack">npmtest-webpack (v0.0.3)</a>
     </h1>
-    <h1>Code coverage report for <span class="entity">node-npmtest-webpack/node_modules/webpack/lib/IgnorePlugin.js</span></h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-webpack/node_modules/webpack/bin/convert-argv.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">5% <small>(1 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">4.97% <small>(16 / 322)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">0% <small>(0 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0.62% <small>(1 / 161)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">0% <small>(0 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 57)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">5% <small>(1 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">4.97% <small>(16 / 322)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-webpack/node_modules/webpack/lib/</a> » IgnorePlugin.js</div>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-webpack/node_modules/webpack/bin/</a> » convert-argv.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
@@ -282,9 +282,538 @@
 68
 69
 70
-71</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -294,6 +823,30 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -303,40 +856,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -344,6 +891,68 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,82 +960,907 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-"use strict";
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var path = require("path");
+var fs = require("fs");
+fs.existsSync = fs.existsSync || <span class="branch-1 cbranch-no" title="branch not covered">path.existsSync;</span>
+var interpret = require("interpret");
 &nbsp;
-class IgnorePlugin {
-	constructor<span class="fstat-no" title="function not covered">(resourceRegExp, contextRegExp) {</span>
-<span class="cstat-no" title="statement not covered">		this.resourceRegExp = resourceRegExp;</span>
-<span class="cstat-no" title="statement not covered">		this.contextRegExp = contextRegExp;</span>
+module.exports = <span class="fstat-no" title="function not covered">function(yargs, argv, convertOptions) {</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">		this.checkIgnore = this.checkIgnore.bind(this);</span>
-	}
+<span class="cstat-no" title="statement not covered">	var options = [];</span>
 &nbsp;
-	/*
-	 * Only returns true if a "resourceRegExp" exists
-	 * and the resource given matches the regexp.
-	 */
-	checkResouce<span class="fstat-no" title="function not covered">(resource) {</span>
-<span class="cstat-no" title="statement not covered">		if(!this.resourceRegExp) {</span>
-<span class="cstat-no" title="statement not covered">			return false;</span>
+	// Shortcuts
+<span class="cstat-no" title="statement not covered">	if(argv.d) {</span>
+<span class="cstat-no" title="statement not covered">		argv.debug = true;</span>
+<span class="cstat-no" title="statement not covered">		argv["output-pathinfo"] = true;</span>
+<span class="cstat-no" title="statement not covered">		if(!argv.devtool) {</span>
+<span class="cstat-no" title="statement not covered">			argv.devtool = "eval-cheap-module-source-map";</span>
 		}
-<span class="cstat-no" title="statement not covered">		return this.resourceRegExp.test(resource);</span>
+	}
+<span class="cstat-no" title="statement not covered">	if(argv.p) {</span>
+<span class="cstat-no" title="statement not covered">		argv["optimize-minimize"] = true;</span>
+<span class="cstat-no" title="statement not covered">		argv["define"] = [].concat(argv["define"] || []).concat("process.env.NODE_ENV=\"production\"");</span>
 	}
 &nbsp;
-	/*
-	 * Returns true if contextRegExp does not exist
-	 * or if context matches the given regexp.
-	 */
-	checkContext<span class="fstat-no" title="function not covered">(context) {</span>
-<span class="cstat-no" title="statement not covered">		if(!this.contextRegExp) {</span>
-<span class="cstat-no" title="statement not covered">			return true;</span>
-		}
-<span class="cstat-no" title="statement not covered">		return this.contextRegExp.test(context);</span>
-	}
-&nbsp;
-	/*
-	 * Returns true if result should be ignored.
-	 * false if it shouldn't.
-	 *
-	 * Not that if "contextRegExp" is given, both the "resourceRegExp"
-	 * and "contextRegExp" have to match.
-	 */
-	checkResult<span class="fstat-no" title="function not covered">(result) {</span>
-<span class="cstat-no" title="statement not covered">		if(!result) {</span>
-<span class="cstat-no" title="statement not covered">			return true;</span>
-		}
-<span class="cstat-no" title="statement not covered">		return this.checkResouce(result.request) &amp;&amp; this.checkContext(result.context);</span>
-	}
-&nbsp;
-	checkIgnore<span class="fstat-no" title="function not covered">(result, callback) {</span>
-		// check if result is ignored
-<span class="cstat-no" title="statement not covered">		if(this.checkResult(result)) {</span>
-<span class="cstat-no" title="statement not covered">			return callback();</span>
-		}
-<span class="cstat-no" title="statement not covered">		return callback(null, result);</span>
-	}
-&nbsp;
-	apply<span class="fstat-no" title="function not covered">(compiler) {</span>
-<span class="cstat-no" title="statement not covered">		compiler.plugin("normal-module-factory", (nmf) =&gt; {</span>
-<span class="cstat-no" title="statement not covered">			nmf.plugin("before-resolve", this.checkIgnore);</span>
+<span class="cstat-no" title="statement not covered">	var configFileLoaded = false;</span>
+<span class="cstat-no" title="statement not covered">	var configFiles = [];</span>
+<span class="cstat-no" title="statement not covered">	var extensions = Object.keys(interpret.extensions).sort(<span class="fstat-no" title="function not covered">function(a, b) {</span></span>
+<span class="cstat-no" title="statement not covered">		return a === ".js" ? -1 : b === ".js" ? 1 : a.length - b.length;</span>
+	});
+<span class="cstat-no" title="statement not covered">	var defaultConfigFiles = ["webpack.config", "webpackfile"].map(<span class="fstat-no" title="function not covered">function(filename) {</span></span>
+<span class="cstat-no" title="statement not covered">		return extensions.map(<span class="fstat-no" title="function not covered">function(ext) {</span></span>
+<span class="cstat-no" title="statement not covered">			return {</span>
+				path: path.resolve(filename + ext),
+				ext: ext
+			};
 		});
-<span class="cstat-no" title="statement not covered">		compiler.plugin("context-module-factory", (cmf) =&gt; {</span>
-<span class="cstat-no" title="statement not covered">			cmf.plugin("before-resolve", this.checkIgnore);</span>
-		});
-	}
-}
+	}).reduce(<span class="fstat-no" title="function not covered">function(a, i) {</span>
+<span class="cstat-no" title="statement not covered">		return a.concat(i);</span>
+	}, []);
 &nbsp;
-module.exports = IgnorePlugin;
+<span class="cstat-no" title="statement not covered">	var i;</span>
+<span class="cstat-no" title="statement not covered">	if(argv.config) {</span>
+<span class="cstat-no" title="statement not covered">		var getConfigExtension = <span class="fstat-no" title="function not covered">function getConfigExtension(configPath) {</span></span>
+<span class="cstat-no" title="statement not covered">			for(i = extensions.length - 1; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered">				var tmpExt = extensions[i];</span>
+<span class="cstat-no" title="statement not covered">				if(configPath.indexOf(tmpExt, configPath.length - tmpExt.length) &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered">					return tmpExt;</span>
+				}
+			}
+<span class="cstat-no" title="statement not covered">			return path.extname(configPath);</span>
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var mapConfigArg = <span class="fstat-no" title="function not covered">function mapConfigArg(configArg) {</span></span>
+<span class="cstat-no" title="statement not covered">			var resolvedPath = path.resolve(configArg);</span>
+<span class="cstat-no" title="statement not covered">			var extension = getConfigExtension(resolvedPath);</span>
+<span class="cstat-no" title="statement not covered">			return {</span>
+				path: resolvedPath,
+				ext: extension
+			};
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var configArgList = Array.isArray(argv.config) ? argv.config : [argv.config];</span>
+<span class="cstat-no" title="statement not covered">		configFiles = configArgList.map(mapConfigArg);</span>
+	} else {
+<span class="cstat-no" title="statement not covered">		for(i = 0; i &lt; defaultConfigFiles.length; i++) {</span>
+<span class="cstat-no" title="statement not covered">			var webpackConfig = defaultConfigFiles[i].path;</span>
+<span class="cstat-no" title="statement not covered">			if(fs.existsSync(webpackConfig)) {</span>
+<span class="cstat-no" title="statement not covered">				configFiles.push({</span>
+					path: webpackConfig,
+					ext: defaultConfigFiles[i].ext
+				});
+<span class="cstat-no" title="statement not covered">				break;</span>
+			}
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered">	if(configFiles.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">		var registerCompiler = <span class="fstat-no" title="function not covered">function registerCompiler(moduleDescriptor) {</span></span>
+<span class="cstat-no" title="statement not covered">			if(moduleDescriptor) {</span>
+<span class="cstat-no" title="statement not covered">				if(typeof moduleDescriptor === "string") {</span>
+<span class="cstat-no" title="statement not covered">					require(moduleDescriptor);</span>
+				} else <span class="cstat-no" title="statement not covered">if(!Array.isArray(moduleDescriptor)) {</span>
+<span class="cstat-no" title="statement not covered">					moduleDescriptor.register(require(moduleDescriptor.module));</span>
+				} else {
+<span class="cstat-no" title="statement not covered">					for(var i = 0; i &lt; moduleDescriptor.length; i++) {</span>
+<span class="cstat-no" title="statement not covered">						try {</span>
+<span class="cstat-no" title="statement not covered">							registerCompiler(moduleDescriptor[i]);</span>
+<span class="cstat-no" title="statement not covered">							break;</span>
+						} catch(e) {
+							// do nothing
+						}
+					}
+				}
+			}
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var requireConfig = <span class="fstat-no" title="function not covered">function requireConfig(configPath) {</span></span>
+<span class="cstat-no" title="statement not covered">			var options = require(configPath);</span>
+<span class="cstat-no" title="statement not covered">			var isES6DefaultExportedFunc = (</span>
+				typeof options === "object" &amp;&amp; options !== null &amp;&amp; typeof options.default === "function"
+			);
+<span class="cstat-no" title="statement not covered">			if(typeof options === "function" || isES6DefaultExportedFunc) {</span>
+<span class="cstat-no" title="statement not covered">				options = isES6DefaultExportedFunc ? options.default : options;</span>
+<span class="cstat-no" title="statement not covered">				options = options(argv.env, argv);</span>
+			}
+<span class="cstat-no" title="statement not covered">			return options;</span>
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered">		configFiles.forEach(<span class="fstat-no" title="function not covered">function(file) {</span></span>
+<span class="cstat-no" title="statement not covered">			registerCompiler(interpret.extensions[file.ext]);</span>
+<span class="cstat-no" title="statement not covered">			options.push(requireConfig(file.path));</span>
+		});
+<span class="cstat-no" title="statement not covered">		configFileLoaded = true;</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered">	if(!configFileLoaded) {</span>
+<span class="cstat-no" title="statement not covered">		return processConfiguredOptions({});</span>
+	} else <span class="cstat-no" title="statement not covered">if(options.length === 1) {</span>
+<span class="cstat-no" title="statement not covered">		return processConfiguredOptions(options[0]);</span>
+	} else {
+<span class="cstat-no" title="statement not covered">		return processConfiguredOptions(options);</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered">	function processConfiguredOptions(options) {</span>
+<span class="cstat-no" title="statement not covered">		if(options === null || typeof options !== "object") {</span>
+<span class="cstat-no" title="statement not covered">			console.error("Config did not export an object or a function returning an object.");</span>
+<span class="cstat-no" title="statement not covered">			process.exit(-1); </span>// eslint-disable-line
+		}
+&nbsp;
+		// process Promise
+<span class="cstat-no" title="statement not covered">		if(typeof options.then === "function") {</span>
+<span class="cstat-no" title="statement not covered">			return options.then(processConfiguredOptions);</span>
+		}
+&nbsp;
+		// process ES6 default
+<span class="cstat-no" title="statement not covered">		if(typeof options === "object" &amp;&amp; typeof options.default === "object") {</span>
+<span class="cstat-no" title="statement not covered">			return processConfiguredOptions(options.default);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(Array.isArray(options)) {</span>
+<span class="cstat-no" title="statement not covered">			options.forEach(processOptions);</span>
+		} else {
+<span class="cstat-no" title="statement not covered">			processOptions(options);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv.context) {</span>
+<span class="cstat-no" title="statement not covered">			options.context = path.resolve(argv.context);</span>
+		}
+<span class="cstat-no" title="statement not covered">		if(!options.context) {</span>
+<span class="cstat-no" title="statement not covered">			options.context = process.cwd();</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv.watch) {</span>
+<span class="cstat-no" title="statement not covered">			options.watch = true;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv["watch-aggregate-timeout"]) {</span>
+<span class="cstat-no" title="statement not covered">			options.watchOptions = options.watchOptions || {};</span>
+<span class="cstat-no" title="statement not covered">			options.watchOptions.aggregateTimeout = +argv["watch-aggregate-timeout"];</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv["watch-poll"]) {</span>
+<span class="cstat-no" title="statement not covered">			options.watchOptions = options.watchOptions || {};</span>
+<span class="cstat-no" title="statement not covered">			if(typeof argv["watch-poll"] !== "boolean")</span>
+<span class="cstat-no" title="statement not covered">				options.watchOptions.poll = +argv["watch-poll"];</span>
+			else
+<span class="cstat-no" title="statement not covered">				options.watchOptions.poll = true;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv["watch-stdin"]) {</span>
+<span class="cstat-no" title="statement not covered">			options.watchOptions = options.watchOptions || {};</span>
+<span class="cstat-no" title="statement not covered">			options.watchOptions.stdin = true;</span>
+<span class="cstat-no" title="statement not covered">			options.watch = true;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		return options;</span>
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered">	function processOptions(options) {</span>
+<span class="cstat-no" title="statement not covered">		var noOutputFilenameDefined = !options.output || !options.output.filename;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">		function ifArg(name, fn, init, finalize) {</span>
+<span class="cstat-no" title="statement not covered">			if(Array.isArray(argv[name])) {</span>
+<span class="cstat-no" title="statement not covered">				if(init) {</span>
+<span class="cstat-no" title="statement not covered">					init();</span>
+				}
+<span class="cstat-no" title="statement not covered">				argv[name].forEach(fn);</span>
+<span class="cstat-no" title="statement not covered">				if(finalize) {</span>
+<span class="cstat-no" title="statement not covered">					finalize();</span>
+				}
+			} else <span class="cstat-no" title="statement not covered">if(typeof argv[name] !== "undefined" &amp;&amp; argv[name] !== null) {</span>
+<span class="cstat-no" title="statement not covered">				if(init) {</span>
+<span class="cstat-no" title="statement not covered">					init();</span>
+				}
+<span class="cstat-no" title="statement not covered">				fn(argv[name], -1);</span>
+<span class="cstat-no" title="statement not covered">				if(finalize) {</span>
+<span class="cstat-no" title="statement not covered">					finalize();</span>
+				}
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function ifArgPair(name, fn, init, finalize) {</span>
+<span class="cstat-no" title="statement not covered">			ifArg(name, <span class="fstat-no" title="function not covered">function(content, idx) {</span></span>
+<span class="cstat-no" title="statement not covered">				var i = content.indexOf("=");</span>
+<span class="cstat-no" title="statement not covered">				if(i &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered">					return fn(null, content, idx);</span>
+				} else {
+<span class="cstat-no" title="statement not covered">					return fn(content.substr(0, i), content.substr(i + 1), idx);</span>
+				}
+			}, init, finalize);
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function ifBooleanArg(name, fn) {</span>
+<span class="cstat-no" title="statement not covered">			ifArg(name, <span class="fstat-no" title="function not covered">function(bool) {</span></span>
+<span class="cstat-no" title="statement not covered">				if(bool) {</span>
+<span class="cstat-no" title="statement not covered">					fn();</span>
+				}
+			});
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function mapArgToBoolean(name, optionName) {</span>
+<span class="cstat-no" title="statement not covered">			ifArg(name, <span class="fstat-no" title="function not covered">function(bool) {</span></span>
+<span class="cstat-no" title="statement not covered">				if(bool === true)</span>
+<span class="cstat-no" title="statement not covered">					options[optionName || name] = true;</span>
+				else <span class="cstat-no" title="statement not covered">if(bool === false)</span>
+<span class="cstat-no" title="statement not covered">					options[optionName || name] = false;</span>
+			});
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function loadPlugin(name) {</span>
+<span class="cstat-no" title="statement not covered">			var loadUtils = require("loader-utils");</span>
+<span class="cstat-no" title="statement not covered">			var args;</span>
+<span class="cstat-no" title="statement not covered">			try {</span>
+<span class="cstat-no" title="statement not covered">				var p = name &amp;&amp; name.indexOf("?");</span>
+<span class="cstat-no" title="statement not covered">				if(p &gt; -1) {</span>
+<span class="cstat-no" title="statement not covered">					args = loadUtils.parseQuery(name.substring(p));</span>
+<span class="cstat-no" title="statement not covered">					name = name.substring(0, p);</span>
+				}
+			} catch(e) {
+<span class="cstat-no" title="statement not covered">				console.log("Invalid plugin arguments " + name + " (" + e + ").");</span>
+<span class="cstat-no" title="statement not covered">				process.exit(-1); </span>// eslint-disable-line
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered">			var path;</span>
+<span class="cstat-no" title="statement not covered">			try {</span>
+<span class="cstat-no" title="statement not covered">				var resolve = require("enhanced-resolve");</span>
+<span class="cstat-no" title="statement not covered">				path = resolve.sync(process.cwd(), name);</span>
+			} catch(e) {
+<span class="cstat-no" title="statement not covered">				console.log("Cannot resolve plugin " + name + ".");</span>
+<span class="cstat-no" title="statement not covered">				process.exit(-1); </span>// eslint-disable-line
+			}
+<span class="cstat-no" title="statement not covered">			var Plugin;</span>
+<span class="cstat-no" title="statement not covered">			try {</span>
+<span class="cstat-no" title="statement not covered">				Plugin = require(path);</span>
+			} catch(e) {
+<span class="cstat-no" title="statement not covered">				console.log("Cannot load plugin " + name + ". (" + path + ")");</span>
+<span class="cstat-no" title="statement not covered">				throw e;</span>
+			}
+<span class="cstat-no" title="statement not covered">			try {</span>
+<span class="cstat-no" title="statement not covered">				return new Plugin(args);</span>
+			} catch(e) {
+<span class="cstat-no" title="statement not covered">				console.log("Cannot instantiate plugin " + name + ". (" + path + ")");</span>
+<span class="cstat-no" title="statement not covered">				throw e;</span>
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function ensureObject(parent, name) {</span>
+<span class="cstat-no" title="statement not covered">			if(typeof parent[name] !== "object" || parent[name] === null) {</span>
+<span class="cstat-no" title="statement not covered">				parent[name] = {};</span>
+			}
+		}
+&nbsp;
+<span class="fstat-no" title="function not covered">		function ensureArray(parent, name) {</span>
+<span class="cstat-no" title="statement not covered">			if(!Array.isArray(parent[name])) {</span>
+<span class="cstat-no" title="statement not covered">				parent[name] = [];</span>
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArgPair("entry", <span class="fstat-no" title="function not covered">function(name, entry) {</span></span>
+<span class="cstat-no" title="statement not covered">			if(typeof options.entry[name] !== "undefined" &amp;&amp; options.entry[name] !== null) {</span>
+<span class="cstat-no" title="statement not covered">				options.entry[name] = [].concat(options.entry[name]).concat(entry);</span>
+			} else {
+<span class="cstat-no" title="statement not covered">				options.entry[name] = entry;</span>
+			}
+		}, <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "entry");</span>
+		});
+&nbsp;
+<span class="fstat-no" title="function not covered">		function bindLoaders(arg, collection) {</span>
+<span class="cstat-no" title="statement not covered">			ifArgPair(arg, <span class="fstat-no" title="function not covered">function(name, binding) {</span></span>
+<span class="cstat-no" title="statement not covered">				if(name === null) {</span>
+<span class="cstat-no" title="statement not covered">					name = binding;</span>
+<span class="cstat-no" title="statement not covered">					binding += "-loader";</span>
+				}
+<span class="cstat-no" title="statement not covered">				options.module[collection].push({</span>
+					test: new RegExp("\\." + name.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&amp;") + "$"),
+					loader: binding
+				});
+			}, <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">				ensureObject(options, "module");</span>
+<span class="cstat-no" title="statement not covered">				ensureArray(options.module, collection);</span>
+			});
+		}
+<span class="cstat-no" title="statement not covered">		bindLoaders("module-bind", "loaders");</span>
+<span class="cstat-no" title="statement not covered">		bindLoaders("module-bind-pre", "preLoaders");</span>
+<span class="cstat-no" title="statement not covered">		bindLoaders("module-bind-post", "postLoaders");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var defineObject;</span>
+<span class="cstat-no" title="statement not covered">		ifArgPair("define", <span class="fstat-no" title="function not covered">function(name, value) {</span></span>
+<span class="cstat-no" title="statement not covered">			if(name === null) {</span>
+<span class="cstat-no" title="statement not covered">				name = value;</span>
+<span class="cstat-no" title="statement not covered">				value = true;</span>
+			}
+<span class="cstat-no" title="statement not covered">			defineObject[name] = value;</span>
+		}, <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">			defineObject = {};</span>
+		}, <span class="fstat-no" title="function not covered">function() {</span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var DefinePlugin = require("../lib/DefinePlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new DefinePlugin(defineObject));</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-path", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.path = path.resolve(value);</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-filename", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.filename = value;</span>
+<span class="cstat-no" title="statement not covered">			noOutputFilenameDefined = false;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-chunk-filename", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.chunkFilename = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-source-map-filename", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.sourceMapFilename = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-public-path", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.publicPath = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-jsonp-function", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.jsonpFunction = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifBooleanArg("output-pathinfo", <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.pathinfo = true;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-library", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.library = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("output-library-target", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			options.output.libraryTarget = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("records-input-path", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			options.recordsInputPath = path.resolve(value);</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("records-output-path", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			options.recordsOutputPath = path.resolve(value);</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("records-path", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			options.recordsPath = path.resolve(value);</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("target", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			options.target = value;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		mapArgToBoolean("cache");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifBooleanArg("hot", <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var HotModuleReplacementPlugin = require("../lib/HotModuleReplacementPlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new HotModuleReplacementPlugin());</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifBooleanArg("debug", <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var LoaderOptionsPlugin = require("../lib/LoaderOptionsPlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new LoaderOptionsPlugin({</span>
+				debug: true
+			}));
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("devtool", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			options.devtool = value;</span>
+		});
+&nbsp;
+<span class="fstat-no" title="function not covered">		function processResolveAlias(arg, key) {</span>
+<span class="cstat-no" title="statement not covered">			ifArgPair(arg, <span class="fstat-no" title="function not covered">function(name, value) {</span></span>
+<span class="cstat-no" title="statement not covered">				if(!name) {</span>
+<span class="cstat-no" title="statement not covered">					throw new Error("--" + arg + " &lt;string&gt;=&lt;string&gt;");</span>
+				}
+<span class="cstat-no" title="statement not covered">				ensureObject(options, key);</span>
+<span class="cstat-no" title="statement not covered">				ensureObject(options[key], "alias");</span>
+<span class="cstat-no" title="statement not covered">				options[key].alias[name] = value;</span>
+			});
+		}
+<span class="cstat-no" title="statement not covered">		processResolveAlias("resolve-alias", "resolve");</span>
+<span class="cstat-no" title="statement not covered">		processResolveAlias("resolve-loader-alias", "resolveLoader");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("resolve-extensions", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "resolve");</span>
+<span class="cstat-no" title="statement not covered">			if(Array.isArray(value)) {</span>
+<span class="cstat-no" title="statement not covered">				options.resolve.extensions = value;</span>
+			} else {
+<span class="cstat-no" title="statement not covered">				options.resolve.extensions = value.split(/,\s*/);</span>
+			}
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("optimize-max-chunks", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var LimitChunkCountPlugin = require("../lib/optimize/LimitChunkCountPlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new LimitChunkCountPlugin({</span>
+				maxChunks: parseInt(value, 10)
+			}));
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("optimize-min-chunk-size", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var MinChunkSizePlugin = require("../lib/optimize/MinChunkSizePlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new MinChunkSizePlugin({</span>
+				minChunkSize: parseInt(value, 10)
+			}));
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifBooleanArg("optimize-minimize", <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var UglifyJsPlugin = require("../lib/optimize/UglifyJsPlugin");</span>
+<span class="cstat-no" title="statement not covered">			var LoaderOptionsPlugin = require("../lib/LoaderOptionsPlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new UglifyJsPlugin({</span>
+				sourceMap: options.devtool &amp;&amp; (options.devtool.indexOf("sourcemap") &gt;= 0 || options.devtool.indexOf("source-map") &gt;= 0)
+			}));
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new LoaderOptionsPlugin({</span>
+				minimize: true
+			}));
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("prefetch", <span class="fstat-no" title="function not covered">function(request) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var PrefetchPlugin = require("../lib/PrefetchPlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new PrefetchPlugin(request));</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("provide", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			var idx = value.indexOf("=");</span>
+<span class="cstat-no" title="statement not covered">			var name;</span>
+<span class="cstat-no" title="statement not covered">			if(idx &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered">				name = value.substr(0, idx);</span>
+<span class="cstat-no" title="statement not covered">				value = value.substr(idx + 1);</span>
+			} else {
+<span class="cstat-no" title="statement not covered">				name = value;</span>
+			}
+<span class="cstat-no" title="statement not covered">			var ProvidePlugin = require("../lib/ProvidePlugin");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(new ProvidePlugin(name, value));</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		ifArg("plugin", <span class="fstat-no" title="function not covered">function(value) {</span></span>
+<span class="cstat-no" title="statement not covered">			ensureArray(options, "plugins");</span>
+<span class="cstat-no" title="statement not covered">			options.plugins.push(loadPlugin(value));</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		mapArgToBoolean("bail");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		mapArgToBoolean("profile");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(noOutputFilenameDefined) {</span>
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "output");</span>
+<span class="cstat-no" title="statement not covered">			if(convertOptions &amp;&amp; convertOptions.outputFilename) {</span>
+<span class="cstat-no" title="statement not covered">				options.output.path = path.resolve(path.dirname(convertOptions.outputFilename));</span>
+<span class="cstat-no" title="statement not covered">				options.output.filename = path.basename(convertOptions.outputFilename);</span>
+			} else <span class="cstat-no" title="statement not covered">if(argv._.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">				options.output.filename = argv._.pop();</span>
+<span class="cstat-no" title="statement not covered">				options.output.path = path.resolve(path.dirname(options.output.filename));</span>
+<span class="cstat-no" title="statement not covered">				options.output.filename = path.basename(options.output.filename);</span>
+			} else <span class="cstat-no" title="statement not covered">if(configFileLoaded) {</span>
+<span class="cstat-no" title="statement not covered">				throw new Error("'output.filename' is required, either in config file or as --output-filename");</span>
+			} else {
+<span class="cstat-no" title="statement not covered">				console.error("No configuration file found and no output filename configured via CLI option.");</span>
+<span class="cstat-no" title="statement not covered">				console.error("A configuration file could be named 'webpack.config.js' in the current directory.");</span>
+<span class="cstat-no" title="statement not covered">				console.error("Use --help to display the CLI options.");</span>
+<span class="cstat-no" title="statement not covered">				process.exit(-1); </span>// eslint-disable-line
+			}
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(argv._.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">			if(Array.isArray(options.entry) || typeof options.entry === "string") {</span>
+<span class="cstat-no" title="statement not covered">				options.entry = {</span>
+					main: options.entry
+				};
+			}
+<span class="cstat-no" title="statement not covered">			ensureObject(options, "entry");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">			var addTo = <span class="fstat-no" title="function not covered">function addTo(name, entry) {</span></span>
+<span class="cstat-no" title="statement not covered">				if(options.entry[name]) {</span>
+<span class="cstat-no" title="statement not covered">					if(!Array.isArray(options.entry[name])) {</span>
+<span class="cstat-no" title="statement not covered">						options.entry[name] = [options.entry[name]];</span>
+					}
+<span class="cstat-no" title="statement not covered">					options.entry[name].push(entry);</span>
+				} else {
+<span class="cstat-no" title="statement not covered">					options.entry[name] = entry;</span>
+				}
+			};
+<span class="cstat-no" title="statement not covered">			argv._.forEach(<span class="fstat-no" title="function not covered">function(content) {</span></span>
+<span class="cstat-no" title="statement not covered">				var i = content.indexOf("=");</span>
+<span class="cstat-no" title="statement not covered">				var j = content.indexOf("?");</span>
+<span class="cstat-no" title="statement not covered">				if(i &lt; 0 || (j &gt;= 0 &amp;&amp; j &lt; i)) {</span>
+<span class="cstat-no" title="statement not covered">					var resolved = path.resolve(content);</span>
+<span class="cstat-no" title="statement not covered">					if(fs.existsSync(resolved)) {</span>
+<span class="cstat-no" title="statement not covered">						addTo("main", resolved);</span>
+					} else {
+<span class="cstat-no" title="statement not covered">						addTo("main", content);</span>
+					}
+				} else {
+<span class="cstat-no" title="statement not covered">					addTo(content.substr(0, i), content.substr(i + 1));</span>
+				}
+			});
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(!options.entry) {</span>
+<span class="cstat-no" title="statement not covered">			if(configFileLoaded) {</span>
+<span class="cstat-no" title="statement not covered">				console.error("Configuration file found but no entry configured.");</span>
+			} else {
+<span class="cstat-no" title="statement not covered">				console.error("No configuration file found and no entry configured via CLI option.");</span>
+<span class="cstat-no" title="statement not covered">				console.error("When using the CLI you need to provide at least two arguments: entry and output.");</span>
+<span class="cstat-no" title="statement not covered">				console.error("A configuration file could be named 'webpack.config.js' in the current directory.");</span>
+			}
+<span class="cstat-no" title="statement not covered">			console.error("Use --help to display the CLI options.");</span>
+<span class="cstat-no" title="statement not covered">			process.exit(-1); </span>// eslint-disable-line
+		}
+	}
+};
 &nbsp;
 &nbsp;</pre></td></tr>
 </tbody></table></pre>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 17:03:23 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 26 2017 02:10:49 GMT+0000 (UTC)</div>
 </div>
 
 
